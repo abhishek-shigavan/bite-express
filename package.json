@@ -1,0 +1,35 @@
+{
+  "name": "bite-express",
+  "version": "1.0.0",
+  "description": "A Food Delivery webapp",
+  "scripts": {
+    "start": "npx parcel index.html",
+    "build": "npx parcel build index.html",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abhishek-shigavan/bite-express.git#main"
+  },
+  "keywords": [
+    "react",
+    "js"
+  ],
+  "author": "Abhishek Shigavan",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "parcel": "^2.9.3",
+    "process": "^0.11.10"
+  },
+  "browserslist": [
+    "last 2 versions"
+  ],
+  "bugs": {
+    "url": "https://github.com/abhishek-shigavan/bite-express/issues"
+  },
+  "homepage": "https://github.com/abhishek-shigavan/bite-express/tree/main#readme"
+}

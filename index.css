@@ -24,6 +24,10 @@
 .header-options > ul > li:hover {
     cursor: pointer;
 }
+.top-rate-filter {
+    margin: 10px;
+    cursor: pointer;
+}
 .res-card-cnt {
     display: flex;
     justify-content: space-between;

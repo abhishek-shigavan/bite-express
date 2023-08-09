@@ -1,4 +1,4 @@
-import { useRouteError } from "react-router-dom";
+import { Link, useRouteError } from "react-router-dom";
 
 const InvalidRoute = () => {
   const routeErr = useRouteError();
@@ -9,6 +9,7 @@ const InvalidRoute = () => {
       <span>
         {routeErr.error.message} : {routeErr.status}
       </span>
+      <span>Plz click <Link to={"/"}>Go to home</Link></span>
     </div>
   );
 };

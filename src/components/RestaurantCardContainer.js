@@ -27,7 +27,7 @@ const RestaurantCardContainer = () => {
     );
   };
 
-  return resData.length === 0 ? (
+  return resData?.length === 0 ? (
     <ShimmerUI />
   ) : (
     <div id="resCardMainCnt" className="res-card-main-cnt">
@@ -58,7 +58,7 @@ const RestaurantCardContainer = () => {
         Search
       </button>
       <div id="resCardCnt" className="res-card-cnt">
-        {resData.map((res) => {
+        {resData?.map((res) => {
           return <RestaurantCard key={res.info?.id} data={res.info} />;
         })}
       </div>

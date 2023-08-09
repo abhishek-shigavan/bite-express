@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import HeaderComponent from "./components/HeaderComponent";
 import RestaurantCardContainer from "./components/RestaurantCardContainer";
 import Offers from "./components/Offers";
@@ -11,15 +11,22 @@ const AppLayout = () => {
   return (
     <>
       <HeaderComponent />
-      <RestaurantCardContainer />
+      <Outlet />
     </>
   );
 };
 
 const AppRoutes = createBrowserRouter([
-  { path: "/", element: <AppLayout />, errorElement: <InvalidRoute /> },
-  { path: "/offers", element: <Offers /> },
-  { path: "/cart", element: <Cart /> },
+  {
+    path: "/",
+    element: <AppLayout />,
+    errorElement: <InvalidRoute />,
+    children: [
+      { path: "/", element: <RestaurantCardContainer /> },
+      { path: "/offers", element: <Offers /> },
+      { path: "/cart", element: <Cart /> },
+    ],
+  },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

@@ -21,9 +21,6 @@
 .header-options > ul > li {
     padding: 10px;    
 }
-.header-options > ul > li:hover {
-    cursor: pointer;
-}
 .top-rate-filter {
     margin: 10px;
     cursor: pointer;
@@ -72,4 +69,8 @@
 .invalid-route-cnt {
     display: flex;
     flex-direction: column;
+}
+.route-link {
+    color: inherit;
+    text-decoration: none;
 }

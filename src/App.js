@@ -6,6 +6,7 @@ import RestaurantCardContainer from "./components/RestaurantCardContainer";
 import Offers from "./components/Offers";
 import Cart from "./components/Cart";
 import InvalidRoute from "./components/InvalidRoute";
+import RestaurantMenuCard from "./components/RestaurantsMenuCard";
 
 const AppLayout = () => {
   return (
@@ -23,6 +24,7 @@ const AppRoutes = createBrowserRouter([
     errorElement: <InvalidRoute />,
     children: [
       { path: "/", element: <RestaurantCardContainer /> },
+      { path: "/restaurant/:resId", element: <RestaurantMenuCard /> },
       { path: "/offers", element: <Offers /> },
       { path: "/cart", element: <Cart /> },
     ],

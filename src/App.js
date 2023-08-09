@@ -5,6 +5,7 @@ import HeaderComponent from "./components/HeaderComponent";
 import RestaurantCardContainer from "./components/RestaurantCardContainer";
 import Offers from "./components/Offers";
 import Cart from "./components/Cart";
+import InvalidRoute from "./components/InvalidRoute";
 
 const AppLayout = () => {
   return (
@@ -16,7 +17,7 @@ const AppLayout = () => {
 };
 
 const AppRoutes = createBrowserRouter([
-  { path: "/", element: <AppLayout /> },
+  { path: "/", element: <AppLayout />, errorElement: <InvalidRoute /> },
   { path: "/offers", element: <Offers /> },
   { path: "/cart", element: <Cart /> },
 ]);

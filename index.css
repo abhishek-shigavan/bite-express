@@ -69,3 +69,7 @@
     border-radius: 6px;
     height: 400px;
 }
+.invalid-route-cnt {
+    display: flex;
+    flex-direction: column;
+}

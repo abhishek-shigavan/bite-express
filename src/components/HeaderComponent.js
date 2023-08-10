@@ -23,7 +23,14 @@ const HeaderComponent = () => {
             </h1>
           </li>
           <li>
-            <h1>Account</h1>
+            <h1>
+              <Link className="route-link" to={"/help"}>Help</Link>
+            </h1>
+          </li>
+          <li>
+            <h1>
+              <Link className="route-link" to={"/signin"}>SignIn</Link>
+            </h1>
           </li>
         </ul>
       </div>

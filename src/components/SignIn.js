@@ -5,9 +5,17 @@ class SignIn extends Component {
     super(props);
   }
 
+  componentDidMount() {
+    console.log(
+      `Mounted ${
+        this.props.child ? this.props.child + " child" : "signin component"
+      }`
+    );
+  }
+
   render = () => {
-    const { child } = this.props
-    console.log(`Render ${child} child`)
+    const { child } = this.props;
+    console.log(`Render ${child ? child + " child" : "signin component"}`);
     return (
       <div>
         <h1>Sign In Page</h1>

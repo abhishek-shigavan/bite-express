@@ -13,10 +13,19 @@ class Help extends Component {
   componentDidMount() {
     console.log("Initial Counter : ", this.state.count)
     console.log("Mounted parent component")
+
+    this.sampleInterval = setInterval(() => {
+        console.log("Hello from Help Component")
+    }, 1000) 
   }
 
   componentDidUpdate() {
     console.log("Counter : ", this.state.count)
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.sampleInterval)
+    console.log("Bye from Help Component")
   }
 
   render = () => {

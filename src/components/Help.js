@@ -12,6 +12,7 @@ class Help extends Component {
 
   componentDidMount() {
     console.log("Initial Counter : ", this.state.count)
+    console.log("Mounted parent component")
   }
 
   componentDidUpdate() {
@@ -19,6 +20,7 @@ class Help extends Component {
   }
 
   render = () => {
+    console.log("Parent rendered")
     return (
       <div>
         <h1>Help Page</h1>

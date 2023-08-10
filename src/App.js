@@ -7,6 +7,8 @@ import Offers from "./components/Offers";
 import Cart from "./components/Cart";
 import InvalidRoute from "./components/InvalidRoute";
 import RestaurantMenuCard from "./components/RestaurantsMenuCard";
+import Help from "./components/Help";
+import SignIn from "./components/SignIn";
 
 const AppLayout = () => {
   return (
@@ -27,6 +29,8 @@ const AppRoutes = createBrowserRouter([
       { path: "/restaurant/:resId", element: <RestaurantMenuCard /> },
       { path: "/offers", element: <Offers /> },
       { path: "/cart", element: <Cart /> },
+      { path: "/help", element: <Help/> },
+      { path: "/signin", element: <SignIn /> },
     ],
   },
 ]);

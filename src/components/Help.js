@@ -10,11 +10,26 @@ class Help extends Component {
     };
   }
 
+  componentDidMount() {
+    console.log("Initial Counter : ", this.state.count)
+  }
+
+  componentDidUpdate() {
+    console.log("Counter : ", this.state.count)
+  }
+
   render = () => {
     return (
       <div>
         <h1>Help Page</h1>
         <h1>Mounting multiple Sign In Component below</h1>
+        <button
+          onClick={() => {
+            this.setState({ count: this.state.count + 1 });
+          }}
+        >
+          Increment Counter
+        </button>
         <SignIn child={"first"} />
         <SignIn child={"second"} />
         <SignIn child={"third"} />

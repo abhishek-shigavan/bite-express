@@ -9,8 +9,13 @@ import InvalidRoute from "./components/InvalidRoute";
 import RestaurantMenuCard from "./components/RestaurantsMenuCard";
 import Help from "./components/Help";
 import SignIn from "./components/SignIn";
+import useOnlineStatus from "./utils/useOnlineStatus";
 
 const AppLayout = () => {
+  const onlineStatus = useOnlineStatus()
+
+  if (!onlineStatus) return <h1>Oops looks like you are offline..Please check your network</h1>
+
   return (
     <>
       <HeaderComponent />

@@ -6,51 +6,51 @@ const HeaderComponent = () => {
   const onlineStatus = useOnlineStatus();
 
   return (
-    <div id="headerCnt" className="header-cnt">
-      <div id="logo" className="header-logo">
-        <img className="header-logo-img" src={HEADER_LOGO} alt="Bite Express" />
+    <div id="headerCnt" className="flex justify-between items-center mx-3 my-2">
+      <div id="logo" className="hover:cursor-pointer w-[100px] h-[100px]">
+        <img className="rounded-lg" src={HEADER_LOGO} alt="Bite Express" />
       </div>
-      <div id="headerOptions" className="header-options">
-        <ul>
-          <li>{onlineStatus ? "🟢" : "🔴"}</li>
-          <li>
+      <div id="headerOptions">
+        <ul className="flex justify-between px-2">
+          <li className="px-2">{onlineStatus ? "🟢" : "🔴"}</li>
+          <li className="px-2">
             <h1>
-              <Link className="route-link" to={"/"}>
+              <Link to={"/"}>
                 Home
               </Link>
             </h1>
           </li>
-          <li>
+          <li className="px-2">
             <h1>
-              <Link className="route-link" to={"/offers"}>
+              <Link to={"/offers"}>
                 Offers
               </Link>
             </h1>
           </li>
-          <li>
+          <li className="px-2">
             <h1>
-              <Link className="route-link" to={"/cart"}>
+              <Link to={"/cart"}>
                 Cart
               </Link>
             </h1>
           </li>
-          <li>
+          <li className="px-2">
             <h1>
-              <Link className="route-link" to={"/help"}>
+              <Link to={"/help"}>
                 Help
               </Link>
             </h1>
           </li>
-          <li>
+          <li className="px-2">
             <h1>
-              <Link className="route-link" to={"/grocery"}>
+              <Link to={"/grocery"}>
                 Grocery
               </Link>
             </h1>
           </li>
-          <li>
+          <li className="px-2">
             <h1>
-              <Link className="route-link" to={"/signin"}>
+              <Link to={"/signin"}>
                 SignIn
               </Link>
             </h1>

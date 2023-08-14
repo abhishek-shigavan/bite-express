@@ -18,7 +18,7 @@ const RestaurantMenuCard = () => {
   } = menuItems[0]?.card?.card?.info;
 
   return (
-    <div className="res-menu">
+    <div className="flex flex-col">
       <span>Menu</span>
       <span>{name}</span>
       <span>{locality}</span>

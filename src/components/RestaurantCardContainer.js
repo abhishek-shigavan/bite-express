@@ -1,5 +1,4 @@
 import RestaurantCard from "./RestaurantCard";
-import mockData from "../utils/mockData";
 import { useState, useEffect } from "react";
 import ShimmerUI from "./ShimmerUI";
 
@@ -30,39 +29,45 @@ const RestaurantCardContainer = () => {
   return resData?.length === 0 ? (
     <ShimmerUI />
   ) : (
-    <div id="resCardMainCnt" className="res-card-main-cnt">
-      <button
-        id="topRateFilter"
-        className="top-rate-filter"
-        onClick={() => {
-          setResData(resData.filter((res) => res.info.avgRating > 4.2));
-        }}
-      >
-        Top Rated Restaurants
-      </button>
-      <input
-        type="text"
-        value={searchVal}
-        onChange={(e) => {
-          setSearchVal(e.target.value);
-        }}
-      ></input>
-      <button
-        onClick={() => {
-          const filteredList = filteredData.filter((res) =>
-            res.info.name.toLowerCase().includes(searchVal.toLowerCase())
-          );
-          setResData(filteredList);
-        }}
-      >
-        Search
-      </button>
-      <div id="resCardCnt" className="res-card-cnt">
+    <>
+      <div className="flex mx-2 my-4 justify-evenly">
+        <button
+          id="topRateFilter"
+          className="border border-solid border-black rounded-[4px] px-4"
+          onClick={() => {
+            setResData(resData.filter((res) => res.info.avgRating > 4.2));
+          }}
+        >
+          Top Rated Restaurants
+        </button>
+        <div>
+          <input
+            className="border border-solid border-black rounded-[4px]"
+            type="text"
+            value={searchVal}
+            onChange={(e) => {
+              setSearchVal(e.target.value);
+            }}
+          ></input>
+          <button
+            className="border border-solid border-black rounded-[4px] px-4 bg-violet-200 mx-3"
+            onClick={() => {
+              const filteredList = filteredData.filter((res) =>
+                res.info.name.toLowerCase().includes(searchVal.toLowerCase())
+              );
+              setResData(filteredList);
+            }}
+          >
+            Search
+          </button>
+        </div>
+      </div>
+      <div id="resCardCnt" className="flex flex-wrap justify-between mx-2 my-3">
         {resData?.map((res) => {
           return <RestaurantCard key={res.info?.id} data={res.info} />;
         })}
       </div>
-    </div>
+    </>
   );
 };
 

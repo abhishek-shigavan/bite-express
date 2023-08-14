@@ -5,12 +5,11 @@ const RestaurantCard = (props) => {
   const { data } = props;
   return (
     <Link to={"/restaurant/" + data.id}>
-      <div id="resCard" className="res-card">
-        <img
-          className="res-card-img"
-          src={RES_CARD_IMG + data.cloudinaryImageId}
-          alt={data.name}
-        />
+      <div
+        id="resCard"
+        className="max-w-[200px] bg-[#f0f0f0] mx-2 my-3 p-2 rounded-lg hover:border border-solid border-black"
+      >
+        <img src={RES_CARD_IMG + data.cloudinaryImageId} alt={data.name} />
         <h1> {data.name}</h1>
         <h2>{data.avgRating}</h2>
         <span>

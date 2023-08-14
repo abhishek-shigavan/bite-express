@@ -43,6 +43,13 @@ const HeaderComponent = () => {
           </li>
           <li>
             <h1>
+              <Link className="route-link" to={"/grocery"}>
+                Grocery
+              </Link>
+            </h1>
+          </li>
+          <li>
+            <h1>
               <Link className="route-link" to={"/signin"}>
                 SignIn
               </Link>

@@ -1,5 +1,6 @@
 import { useParams } from "react-router";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
+import RestaurantMenuCardAccordian from "./RestaurantMenuCardAccordian";
 
 const RestaurantMenuCard = () => {
   const { resId } = useParams();
@@ -25,7 +26,7 @@ const RestaurantMenuCard = () => {
       <span>{areaName}</span>
       <span>{cuisines.join(", ")}</span>
       <span>{costForTwoMessage}</span>
-      {menuItems[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.itemCards?.map(
+      {/*menuItems[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.itemCards?.map(
         (item) => {
           return (
             <span key={item.card.info.id}>
@@ -33,7 +34,15 @@ const RestaurantMenuCard = () => {
             </span>
           );
         }
-      )}
+      )*/}
+      <div className="flex w-8/12 mx-auto border border-black border-dotted"></div>
+      <div className="flex flex-col mx-auto w-6/12 my-6">
+        {menuItems[3]?.menuListItems.map((item, index) => {
+          return (
+            <RestaurantMenuCardAccordian key={index} data={item.card.card} />
+          );
+        })}
+      </div>
     </div>
   );
 };

@@ -1,11 +1,14 @@
 import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import ShimmerUI from "./ShimmerUI";
+import restaurantCardWithOffer from "./restaurantCardWithOffer";
 
 const RestaurantCardContainer = () => {
   const [resData, setResData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [searchVal, setSearchVal] = useState("");
+
+  const RestaurantCardWithOffer = restaurantCardWithOffer(RestaurantCard)
 
   useEffect(() => {
     fetchData();
@@ -61,10 +64,11 @@ const RestaurantCardContainer = () => {
             Search
           </button>
         </div>
+        {/*<button onClick={() => document.body.classList.toggle('dark')}>Click to change theme</button>*/}
       </div>
       <div id="resCardCnt" className="flex flex-wrap justify-between mx-2 my-3">
         {resData?.map((res) => {
-          return <RestaurantCard key={res.info?.id} data={res.info} />;
+          return res?.info?.aggregatedDiscountInfoV3?.header ? <RestaurantCardWithOffer key={res.info?.id} data={res.info}/> : <RestaurantCard key={res.info?.id} data={res.info} />;
         })}
       </div>
     </>

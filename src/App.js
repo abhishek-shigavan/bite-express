@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense, lazy, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import HeaderComponent from "./components/HeaderComponent";
@@ -10,20 +10,25 @@ import RestaurantMenuCard from "./components/RestaurantsMenuCard";
 import Help from "./components/Help";
 import SignIn from "./components/SignIn";
 import useOnlineStatus from "./utils/useOnlineStatus";
+import UserContext from "./utils/UserContext";
 
 const Grocery = lazy(() => import("./components/GroceryContainer"));
 
 const AppLayout = () => {
   const onlineStatus = useOnlineStatus();
-
+  const [userName, setUserName] = useState();
+  useEffect(() => {
+    const data = { name: "Xyz" };
+    setUserName(data.name);
+  }, []);
   if (!onlineStatus)
     return <h1>Oops looks like you are offline..Please check your network</h1>;
 
   return (
-    <>
+    <UserContext.Provider value={{ loggedUser: userName, setUserName }}>
       <HeaderComponent />
       <Outlet />
-    </>
+    </UserContext.Provider>
   );
 };
 

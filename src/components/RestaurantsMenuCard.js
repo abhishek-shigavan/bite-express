@@ -1,11 +1,13 @@
 import { useParams } from "react-router";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
 import RestaurantMenuCardAccordian from "./RestaurantMenuCardAccordian";
+import { useState } from "react";
 
 const RestaurantMenuCard = () => {
   const { resId } = useParams();
-
+  const [showItems, setShowItems] = useState(null)
   const menuItems = useRestaurantMenu(resId);
+
   if (menuItems.length === 0) return <span>Menu</span>;
   const {
     name,
@@ -39,7 +41,7 @@ const RestaurantMenuCard = () => {
       <div className="flex flex-col mx-auto w-6/12 my-6">
         {menuItems[3]?.menuListItems.map((item, index) => {
           return (
-            <RestaurantMenuCardAccordian key={index} data={item.card.card} />
+            <RestaurantMenuCardAccordian key={index} data={item.card.card} showItems={index === showItems ? true : false} setShowItems={() => setShowItems(index === showItems ? null : index)}/>
           );
         })}
       </div>

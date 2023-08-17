@@ -1,4 +1,5 @@
 import { Component } from "react";
+import UserContext from "../utils/UserContext";
 
 class SignIn extends Component {
   constructor(props) {
@@ -19,6 +20,11 @@ class SignIn extends Component {
     return (
       <div>
         <h1>Sign In Page</h1>
+        <UserContext.Consumer>
+          {({loggedUser, setUserName}) => {
+            return <input placeholder="Type here to change UserName" onChange={(e) => setUserName(e.target.value)}/>
+          }}
+        </UserContext.Consumer>
       </div>
     );
   };

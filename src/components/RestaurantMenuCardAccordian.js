@@ -1,15 +1,13 @@
-import { useState } from "react";
 import { RES_MENU_ITEMS_IMG } from "../utils/config";
 
-const RestaurantMenuCardAccordian = ({ data }) => {
-  const [showItems, setShowItems] = useState(false);
+const RestaurantMenuCardAccordian = ({ data, showItems, setShowItems }) => {
   const listItems = data.itemCards;
   const categoryItems = data.categories;
   return (
     <div className="flex flex-col bg-slate-100 mb-2">
       <div className="flex justify-between py-2 my-2 px-4">
         {data.title}
-        <button onClick={() => setShowItems(!showItems)}>Expand</button>
+        <button onClick={() => setShowItems()}>Expand</button>
       </div>
       {showItems && (
         <div>

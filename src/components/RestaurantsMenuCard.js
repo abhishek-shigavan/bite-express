@@ -39,7 +39,7 @@ const RestaurantMenuCard = () => {
       )*/}
       <div className="flex w-8/12 mx-auto border border-black border-dotted"></div>
       <div className="flex flex-col mx-auto w-6/12 my-6">
-        {menuItems[3]?.menuListItems.map((item, index) => {
+        {menuItems[2]?.menuListItems.map((item, index) => {
           return (
             <RestaurantMenuCardAccordian key={index} data={item.card.card} showItems={index === showItems ? true : false} setShowItems={() => setShowItems(index === showItems ? null : index)}/>
           );

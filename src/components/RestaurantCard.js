@@ -7,9 +7,15 @@ const RestaurantCard = (props) => {
     <Link to={"/restaurant/" + data.id}>
       <div
         id="resCard"
-        className="max-w-[200px] bg-[#f0f0f0] mx-2 my-3 p-2 rounded-lg hover:border border-solid border-black"
+        className="w-[320px] bg-[#f0f0f0] mx-2 my-3 p-2 rounded-lg hover:border border-solid border-black"
       >
-        <img src={RES_CARD_IMG + data.cloudinaryImageId} alt={data.name} />
+        <div>
+          <img
+            src={RES_CARD_IMG + data.cloudinaryImageId}
+            alt={data.name}
+            className="h-[210px] w-[100%] object-cover"
+          />
+        </div>
         <h1> {data.name}</h1>
         <h2>{data.avgRating}</h2>
         <span>

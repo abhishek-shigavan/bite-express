@@ -11,6 +11,8 @@ import Help from "./components/Help";
 import SignIn from "./components/SignIn";
 import useOnlineStatus from "./utils/useOnlineStatus";
 import UserContext from "./utils/UserContext";
+import { Provider } from "react-redux";
+import appStore from "./utils/store/appStore";
 
 const Grocery = lazy(() => import("./components/GroceryContainer"));
 
@@ -25,10 +27,12 @@ const AppLayout = () => {
     return <h1>Oops looks like you are offline..Please check your network</h1>;
 
   return (
-    <UserContext.Provider value={{ loggedUser: userName, setUserName }}>
-      <HeaderComponent />
-      <Outlet />
-    </UserContext.Provider>
+    <Provider store={appStore}>
+      <UserContext.Provider value={{ loggedUser: userName, setUserName }}>
+        <HeaderComponent />
+        <Outlet />
+      </UserContext.Provider>
+    </Provider>
   );
 };
 

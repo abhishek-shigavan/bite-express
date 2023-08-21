@@ -5,7 +5,7 @@ import { useState } from "react";
 
 const RestaurantMenuCard = () => {
   const { resId } = useParams();
-  const [showItems, setShowItems] = useState(null)
+  const [showItems, setShowItems] = useState(null);
   const menuItems = useRestaurantMenu(resId);
 
   if (menuItems.length === 0) return <span>Menu</span>;
@@ -28,20 +28,19 @@ const RestaurantMenuCard = () => {
       <span>{areaName}</span>
       <span>{cuisines.join(", ")}</span>
       <span>{costForTwoMessage}</span>
-      {/*menuItems[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.itemCards?.map(
-        (item) => {
-          return (
-            <span key={item.card.info.id}>
-              {item.card.info.name} -- {item.card.info.price / 100}
-            </span>
-          );
-        }
-      )*/}
       <div className="flex w-8/12 mx-auto border border-black border-dotted"></div>
       <div className="flex flex-col mx-auto w-6/12 my-6">
-        {menuItems[2]?.menuListItems.map((item, index) => {
+        {menuItems[3]?.menuListItems.map((item, index) => {
           return (
-            <RestaurantMenuCardAccordian key={index} data={item.card.card} showItems={index === showItems ? true : false} setShowItems={() => setShowItems(index === showItems ? null : index)}/>
+            <RestaurantMenuCardAccordian
+              key={index}
+              data={item.card.card}
+              showItems={index === showItems ? true : false}
+              setShowItems={() =>
+                setShowItems(index === showItems ? null : index)
+              }
+              resMeta={{ name: name, area: areaName }}
+            />
           );
         })}
       </div>

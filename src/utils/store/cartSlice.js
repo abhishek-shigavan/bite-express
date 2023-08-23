@@ -10,7 +10,7 @@ const cartSlice = createSlice({
       state.cartItems.push(action.payload);
     },
     removeItem: (state, action) => {
-      console.log(action.payload)
+      state.cartItems.splice(action.payload, 1)
     },
     updateItemQuantity: (state, action) => {
       const updatedItem = {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addItemToCart, removeItem, updateItemQuantity } from "../utils/store/cartSlice";
+import { addItemToCart, clearCart, removeItem, updateItemQuantity } from "../utils/store/cartSlice";
 import { addRestaurantInfo, clearRestaurantInfo } from "../utils/store/restaurantSlice";
 
 const ButtonContainer = (props) => {
@@ -17,7 +17,7 @@ const ButtonContainer = (props) => {
       setItemQuantity(cartItems[isPresent].quantity);
       setShowAddBtn(false);
     } else if (isPresent < 0 && !showAddBtn) {
-        setShowAddBtn(true)
+      setShowAddBtn(true);
     }
 
     if (returnIndex) return isPresent;
@@ -27,12 +27,7 @@ const ButtonContainer = (props) => {
     checkItemInCart();
   }, [cartItems]);
 
-  const handleAddNewRestaurant = (resMeta) => {
-    dispatch(clearRestaurantInfo());
-    dispatch(addRestaurantInfo(resMeta));
-  };
-
-  const handleAddToCart = (item, resMeta) => {
+  const dispatchAddItemToCart = (item) => {
     dispatch(
       addItemToCart({
         id: item.card.info.id,
@@ -41,12 +36,20 @@ const ButtonContainer = (props) => {
         quantity: 1,
       })
     );
+  };
 
-    resDetails.length > 0 && resMeta.name !== resDetails[0]?.name
-      ? handleAddNewRestaurant(resMeta)
-      : resDetails.length > 0 && resMeta.name === resDetails[0]?.name
-      ? console.log("same restaurant")
-      : dispatch(addRestaurantInfo(resMeta));
+  const handleAddToCart = (item, resMeta) => {
+    if (resDetails.length > 0 && resMeta.name !== resDetails[0]?.name) {
+      dispatch(clearRestaurantInfo());
+      dispatch(addRestaurantInfo(resMeta));
+      dispatch(clearCart());
+      dispatchAddItemToCart(item);
+    } else if (resDetails.length > 0 && resMeta.name === resDetails[0]?.name) {
+      dispatchAddItemToCart(item);
+    } else {
+      dispatch(addRestaurantInfo(resMeta));
+      dispatchAddItemToCart(item);
+    }
   };
 
   const handleItemQuantity = (action) => {
@@ -68,7 +71,7 @@ const ButtonContainer = (props) => {
             quantity: itemQuantity - 1,
           })
         )
-      : dispatch(removeItem(itemIndex));
+      : dispatch(removeItem(itemIndex)); // check if cart items left with last item yes => clear res & cart no => remove item
   };
 
   return (

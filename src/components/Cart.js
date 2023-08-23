@@ -6,19 +6,11 @@ const Cart = () => {
   const cartItems = useSelector((store) => store.cart.cartItems);
   const resDetails = useSelector((store) => store.restaurant.restaurantMeta)
 
-  const handleClearCart = () => {
-    dispatch(clearCart());
-  };
-
-  const handleDeleteItem = (ele) => {
-    dispatch(removeItem(ele));
-  };
-
   return (
     <>
       <h1>Cart Page</h1>
       {cartItems.length > 0 &&
-        cartItems.map((ele) => (
+        cartItems.map((ele, index) => (
           <div
             key={ele.id}
             className="flex w-6/12 m-auto bg-slate-300 justify-between"
@@ -26,11 +18,11 @@ const Cart = () => {
             <li>
               {ele.name} - {ele.price} - {ele.quantity}
             </li>
-            <button onClick={() => handleDeleteItem(ele)}>Delete</button>
+            <button onClick={() => dispatch(removeItem(index))}>Delete</button>
           </div>
         ))}
       {cartItems.length > 0 && (
-        <button onClick={handleClearCart}>Clear Cart</button>
+        <button onClick={() => dispatch(clearCart())}>Clear Cart</button>
       )}
     </>
   );

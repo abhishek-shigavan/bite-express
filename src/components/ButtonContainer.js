@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addItemToCart, updateItemQuantity } from "../utils/store/cartSlice";
+import { addItemToCart, removeItem, updateItemQuantity } from "../utils/store/cartSlice";
 import { addRestaurantInfo, clearRestaurantInfo } from "../utils/store/restaurantSlice";
 
 const ButtonContainer = (props) => {
@@ -16,7 +16,10 @@ const ButtonContainer = (props) => {
     if (isPresent >= 0) {
       setItemQuantity(cartItems[isPresent].quantity);
       setShowAddBtn(false);
+    } else if (isPresent < 0 && !showAddBtn) {
+        setShowAddBtn(true)
     }
+
     if (returnIndex) return isPresent;
   };
 
@@ -57,13 +60,15 @@ const ButtonContainer = (props) => {
             quantity: itemQuantity + 1,
           })
         )
-      : dispatch(
+      : itemQuantity > 1
+      ? dispatch(
           updateItemQuantity({
             item: cartItems[itemIndex],
             itemIndex: itemIndex,
             quantity: itemQuantity - 1,
           })
-        );
+        )
+      : dispatch(removeItem(itemIndex));
   };
 
   return (

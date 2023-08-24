@@ -52,6 +52,15 @@ const ButtonContainer = (props) => {
     }
   };
 
+  const handleRemoveItem = (itemIndex) => {
+    if(cartItems.length === 1) {
+        dispatch(clearCart())
+        dispatch(clearRestaurantInfo())
+    } else {
+        dispatch(removeItem(itemIndex))
+    }
+  }
+
   const handleItemQuantity = (action) => {
     const itemIndex = checkItemInCart(true);
 
@@ -71,7 +80,7 @@ const ButtonContainer = (props) => {
             quantity: itemQuantity - 1,
           })
         )
-      : dispatch(removeItem(itemIndex)); // check if cart items left with last item yes => clear res & cart no => remove item
+      : handleRemoveItem(itemIndex)
   };
 
   return (

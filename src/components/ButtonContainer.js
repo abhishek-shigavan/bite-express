@@ -82,7 +82,8 @@ const ButtonContainer = (props) => {
         )
       : handleRemoveItem(itemIndex)
   };
-
+  const quantityBtnMenu = "border border-gray-400 rounded-lg px-3 py-1 bg-black text-white"
+  const quantityBtnCart = "border border-gray-400 rounded-lg px-3 py-1 bg-white text-green-500"
   return (
     <>
       {showAddBtn ? (
@@ -96,16 +97,16 @@ const ButtonContainer = (props) => {
         <div className={position ? "flex static" : "flex absolute top-[80px] right-[15%]"}>
           <button
             onClick={() => handleItemQuantity("dec")}
-            className="border border-gray-400 rounded-lg px-3 py-1 bg-black text-white"
+            className={position ? quantityBtnCart : quantityBtnMenu}
           >
             -
           </button>
-          <span className="border border-gray-400 rounded-lg px-3 py-1 bg-black text-white">
+          <span className={position ? quantityBtnCart : quantityBtnMenu}>
             {itemQuantity}
           </span>
           <button
             onClick={() => handleItemQuantity("inc")}
-            className="border border-gray-400 rounded-lg px-3 py-1 bg-black text-white"
+            className={position ? quantityBtnCart : quantityBtnMenu}
           >
             +
           </button>

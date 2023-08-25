@@ -10,6 +10,7 @@ const Cart = () => {
   const cartItems = useSelector((store) => store.cart.cartItems);
   const resDetails = useSelector((store) => store.restaurant.restaurantMeta);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [gst, setGst] = useState(0);
 
   useEffect(() => {
     const total = cartItems.reduce(
@@ -17,6 +18,7 @@ const Cart = () => {
       0
     );
     setTotalPrice(total);
+    setGst(Math.round(total / 18));
   }, [cartItems]);
 
   const handleRemoveItem = (index) => {
@@ -40,7 +42,7 @@ const Cart = () => {
           <div className="flex pb-9">
             <img
               src={RES_CARD_IMG + resDetails[0].imgId}
-              className="w-4/12 rounded-xl mr-5"
+              className="w-4/12 h-[180px] object-cover rounded-xl mr-5"
             />
             <div className="flex flex-col">
               <span className="font-extrabold text-2xl">
@@ -51,20 +53,50 @@ const Cart = () => {
           </div>
           <div>
             {cartItems.map((ele, index) => (
-              <div key={ele.id} className="flex justify-between items-center">
+              <div
+                key={ele.id}
+                className="flex justify-between items-center pb-3"
+              >
                 <div className="flex flex-col w-6/12">
-                  <span className="font-bold text-lg">{ele.name}</span>
+                  <span className="text-lg">{ele.name}</span>
                   <span className="text-[#686B78]">₹ {ele.price}</span>
                 </div>
                 <div className="w-3/12">
-                <ButtonContainer menuItemName={ele.name} resMeta={resDetails[0]} position={true}/></div>
+                  <ButtonContainer
+                    menuItemName={ele.name}
+                    resMeta={resDetails[0]}
+                    position={true}
+                  />
+                </div>
                 <span className="text-[#686B78] w-2/12">
                   ₹ {ele.price * ele.quantity}
                 </span>
                 <div className="flex justify-end w-1/12">
-                <button onClick={() => handleRemoveItem(index)}>Delete</button></div>
+                  <button onClick={() => handleRemoveItem(index)}>
+                    Delete
+                  </button>
+                </div>
               </div>
             ))}
+          </div>
+          <div className="border-b border-[#e9e9eb] my-5"></div>
+          <div className="flex flex-col w-6/12 pb-3">
+            <span className="pb-2">Bill Details</span>
+            <div className="flex justify-between text-[#686B78] pb-1">
+              <span>Item Total</span>
+              <span>₹ {totalPrice}</span>
+            </div>
+            <div className="flex justify-between text-[#686B78] pb-1">
+              <span className="">Delivery Fee | {resDetails[0].distance} </span>
+              <span>₹ {resDetails[0].fee}</span>
+            </div>
+            <div className="flex justify-between text-[#686B78] pb-1">
+              <span className="">GST Charges</span> <span>₹ {gst}</span>
+            </div>
+          </div>
+          <div className="border-b border-[#e9e9eb] my-5"></div>
+          <div >
+            <span className="mr-3">TO PAY</span><span>₹ {Math.round(resDetails[0].fee + gst + totalPrice)}</span>
           </div>
         </div>
       ) : (

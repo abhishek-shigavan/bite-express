@@ -53,7 +53,7 @@ export const RenderListItem = (props) => {
                 src={RES_MENU_ITEMS_IMG + item.card.info.imageId}
                 className="rounded-lg w-[75%] h-[96px] object-cover"
               />
-              <ButtonContainer menuItemName={item.card.info.name} item={item} resMeta={resMeta}/>
+              <ButtonContainer menuItemName={item.card.info.name} item={item} resMeta={resMeta} position={false}/>
             </div>
           </div>
         ))}

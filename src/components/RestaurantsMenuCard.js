@@ -18,7 +18,9 @@ const RestaurantMenuCard = () => {
     city,
     avgRatingString,
     totalRatingsString,
-    cloudinaryImageId
+    cloudinaryImageId,
+    sla,
+    feeDetails
   } = menuItems[0]?.card?.card?.info;
 
   return (
@@ -40,7 +42,7 @@ const RestaurantMenuCard = () => {
               setShowItems={() =>
                 setShowItems(index === showItems ? null : index)
               }
-              resMeta={{ name: name, area: areaName, imgId: cloudinaryImageId }}
+              resMeta={{ name: name, area: areaName, imgId: cloudinaryImageId, fee: feeDetails.totalFee / 100, distance: sla.lastMileTravelString }}
             />
           );
         })}

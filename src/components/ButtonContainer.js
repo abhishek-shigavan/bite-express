@@ -6,7 +6,7 @@ import { addRestaurantInfo, clearRestaurantInfo } from "../utils/store/restauran
 const ButtonContainer = (props) => {
   const [showAddBtn, setShowAddBtn] = useState(true);
   const [itemQuantity, setItemQuantity] = useState(1);
-  const { menuItemName, item, resMeta } = props;
+  const { menuItemName, item, resMeta, position } = props;
   const dispatch = useDispatch();
   const resDetails = useSelector((store) => store.restaurant.restaurantMeta);
   const cartItems = useSelector((store) => store.cart.cartItems);
@@ -93,7 +93,7 @@ const ButtonContainer = (props) => {
           Add
         </button>
       ) : (
-        <div className="flex absolute top-[80px] right-[15%]">
+        <div className={position ? "flex static" : "flex absolute top-[80px] right-[15%]"}>
           <button
             onClick={() => handleItemQuantity("dec")}
             className="border border-gray-400 rounded-lg px-3 py-1 bg-black text-white"

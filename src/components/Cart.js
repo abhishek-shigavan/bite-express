@@ -97,21 +97,20 @@ const Cart = () => {
               </div>
             </div>
             <div className="border-b border-[#e9e9eb] my-5"></div>
-            <div>
-              <span className="mr-3">TO PAY</span>
-              <span>₹ {Math.round(resDetails[0].fee + gst + totalPrice)}</span>
+            <div className="flex justify-between">
+              <div>
+                <span className="mr-3">TO PAY</span>
+                <span>₹ {Math.round(resDetails[0].fee + gst + totalPrice)}</span>
+              </div>
+              <>
+                <button className="border px-3 py-1 rounded-lg" onClick={() => handleClearCart()}>Clear Cart</button>
+              </>
             </div>
           </div>
           <AddressContainer />
         </>
       ) : (
         <div></div>
-      )}
-      {cartItems.length > 0 && (
-        <>
-          <span>{totalPrice}</span>
-          <button onClick={() => handleClearCart()}>Clear Cart</button>
-        </>
       )}
     </div>
   );

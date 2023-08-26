@@ -17,7 +17,7 @@ const userSlice = createSlice({
       state.addressDetails.splice(action.payload, 1)
     },
     updateAddressDetails: (state, action) => {
-      state.addressDetails = action.payload;
+      state.addressDetails[action.payload.index] = action.payload.item;
     },
   },
 });

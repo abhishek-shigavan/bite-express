@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addAddressDetails } from "../utils/store/userSlice";
+import { addAddressDetails, removeAddressDetails } from "../utils/store/userSlice";
 
 const AddressContainer = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -26,8 +26,8 @@ const AddressContainer = () => {
         </button>
       </div>
       
-      {userAddress.map((item) => 
-        <div className="flex border rounded-lg p-4 my-4">
+      {userAddress.map((item, index) => 
+        <div key={index} className="flex border rounded-lg p-4 my-4">
           <div className="flex flex-col w-8/12">
           <span>{item.type}</span>
           <span>{item.apartment}</span>
@@ -36,7 +36,7 @@ const AddressContainer = () => {
           </div>
           <div className="flex justify-center w-4/12">
           <div><button className="border rounded-lg px-3 py-1 mr-4">Edit</button></div>
-          <div><button className="border rounded-lg px-3 py-1">Delete</button></div>
+          <div><button onClick={() => dispatch(removeAddressDetails(index))} className="border rounded-lg px-3 py-1">Delete</button></div>
           </div>
         </div>
       )}

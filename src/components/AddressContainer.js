@@ -1,11 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addAddressDetails } from "../utils/store/userSlice";
 
 const AddressContainer = () => {
   const [openModal, setOpenModal] = useState(false);
   const [addressDetails, setAddressDetails] = useState({});
+  const userAddress = useSelector((store) => store.user.addressDetails) 
+  const dispatch = useDispatch()
+
+  const resetAddressDetails = (action = "none") => {
+    if(action === "save") dispatch(addAddressDetails(addressDetails)) 
+    setOpenModal(false)
+    setAddressDetails({ apartment: '', landmark: '', area: '', type: '' })
+  }
 
   return (
-    <div className="flex flex-col w-6/12 bg-white mx-auto mt-10 p-6">
+    <div className="flex flex-col w-6/12 bg-white mx-auto my-10 p-6">
       <div className="flex justify-between items-center">
         <span>Address</span>
         <button
@@ -15,6 +25,22 @@ const AddressContainer = () => {
           Add
         </button>
       </div>
+      
+      {userAddress.map((item) => 
+        <div className="flex border rounded-lg p-4 my-4">
+          <div className="flex flex-col w-8/12">
+          <span>{item.type}</span>
+          <span>{item.apartment}</span>
+          <span>{item.landmark}</span>
+          <span>{item.area}</span>
+          </div>
+          <div className="flex justify-center w-4/12">
+          <div><button className="border rounded-lg px-3 py-1 mr-4">Edit</button></div>
+          <div><button className="border rounded-lg px-3 py-1">Delete</button></div>
+          </div>
+        </div>
+      )}
+
       <div
         className={
           openModal
@@ -29,8 +55,8 @@ const AddressContainer = () => {
         >
           <div className="self-end">
             <button
-              className="border border-[#686B78] px-3 py-1"
-              onClick={() => setOpenModal(false)}
+              className="border border-[#686B78] px-3 py-1 rounded-lg"
+              onClick={() => resetAddressDetails()}
             >
               Close
             </button>
@@ -65,7 +91,6 @@ const AddressContainer = () => {
               placeholder="Street / Area Name"
               className="border-b"
               onChange={(e) => {
-                console.log(e)
                 setAddressDetails({
                   ...addressDetails,
                   area: e.target.value,
@@ -73,30 +98,27 @@ const AddressContainer = () => {
               }}
             />
           </div>          
-          <div className="flex justify-between">
-            <button
-              onClick={() => setAddressDetails({ ...addressDetails, type: "home" })}
+          <div className="flex justify-between py-3">
+            <button className="border border-[#686B78] rounded-lg px-3 py-2"
+              onClick={() => setAddressDetails({ ...addressDetails, type: "Home" })}
             >
               Home
             </button>
-            <button
-              onClick={() => setAddressDetails({ ...addressDetails, type: "work" })}
+            <button className="border border-[#686B78] rounded-lg px-3 py-2"
+              onClick={() => setAddressDetails({ ...addressDetails, type: "Work" })}
             >
               Work
             </button>
-            <button
-              onClick={() => setAddressDetails({ ...addressDetails, type: "other" })}
+            <button className="border border-[#686B78] rounded-lg px-3 py-2"
+              onClick={() => setAddressDetails({ ...addressDetails, type: "Other" })}
             >
               Other
             </button>
           </div>
-          <button className=""
-          type="submit" 
-          onClick={() => {
-            console.log(addressDetails)
-            setOpenModal(false)
-            setAddressDetails({apartment: "", landmark: "", area: "", type: ""})
-            }}>Save</button>
+          <div>
+          <button className="border border-[#686B78] rounded-lg px-3 py-2"
+            onClick={() => resetAddressDetails("save")}>Save</button>
+          </div>
         </div>
       </div>
     </div>

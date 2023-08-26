@@ -1,22 +1,27 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addAddressDetails, removeAddressDetails } from "../utils/store/userSlice";
+import { addAddressDetails, removeAddressDetails, updateAddressDetails } from "../utils/store/userSlice";
 
 const AddressContainer = () => {
   const [openModal, setOpenModal] = useState(false);
-  const [enableUpdate, setEnableUpdate] = useState(false);
+  const [enableUpdate, setEnableUpdate] = useState({addressId: 0, visibility: false});
   const [addressDetails, setAddressDetails] = useState({});
   const userAddress = useSelector((store) => store.user.addressDetails);
   const dispatch = useDispatch();
 
-  const handleEditAddress = (item) => {
-    setEnableUpdate(true);
+  const handleEditAddress = (index, item) => {
+    setEnableUpdate({addressId: index, visibility: true});
     setAddressDetails(item);
     setOpenModal(true);
   };
 
-  const resetAddressDetails = (action = "none") => {
-    if (action === "save") dispatch(addAddressDetails(addressDetails));
+  const handleAddressDetails = (action = "none") => {
+    if (action === "save") {
+      dispatch(addAddressDetails(addressDetails));
+    } else if (action === "update") {
+      dispatch(updateAddressDetails({index: enableUpdate.addressId, item: addressDetails}))
+    }
+    if (enableUpdate.visibility) setEnableUpdate({addressId: 0, visibility: false})
     setOpenModal(false);
     setAddressDetails({ apartment: "", landmark: "", area: "", type: "" });
   };
@@ -44,7 +49,7 @@ const AddressContainer = () => {
           <div className="flex justify-center w-4/12">
             <div>
               <button
-                onClick={() => handleEditAddress(item)}
+                onClick={() => handleEditAddress(index, item)}
                 className="border rounded-lg px-3 py-1 mr-4"
               >
                 Edit
@@ -68,7 +73,7 @@ const AddressContainer = () => {
             ? "flex justify-center items-center fixed z-[1] w-full h-full overflow-auto bg-[rgba(66,66,66,0.5)] top-0 left-0"
             : "hidden"
         }
-        onClick={() => setOpenModal(false)}
+        onClick={() => handleAddressDetails()}
       >
         <div
           className="flex flex-col bg-white opacity-100 rounded-lg w-6/12 p-4"
@@ -77,7 +82,7 @@ const AddressContainer = () => {
           <div className="self-end">
             <button
               className="border border-[#686B78] px-3 py-1 rounded-lg"
-              onClick={() => resetAddressDetails()}
+              onClick={() => handleAddressDetails()}
             >
               Close
             </button>
@@ -146,12 +151,12 @@ const AddressContainer = () => {
             </button>
           </div>
           <div>
-            {enableUpdate ? (
-              <button className="border rounded-lg px-3 py-2">Update</button>
+            {enableUpdate.visibility ? (
+              <button className="border rounded-lg px-3 py-2" onClick={() => handleAddressDetails("update")}>Update</button>
             ) : (
               <button
                 className="border border-[#686B78] rounded-lg px-3 py-2"
-                onClick={() => resetAddressDetails("save")}
+                onClick={() => handleAddressDetails("save")}
               >
                 Save
               </button>

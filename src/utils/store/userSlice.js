@@ -13,11 +13,14 @@ const userSlice = createSlice({
     addAddressDetails: (state, action) => {
       state.addressDetails.push(action.payload);
     },
+    removeAddressDetails: (state, action) => {
+      state.addressDetails.splice(action.payload, 1)
+    },
     updateAddressDetails: (state, action) => {
       state.addressDetails = action.payload;
     },
   },
 });
 
-export const { addUserDetails, addAddressDetails, updateAddressDetails } = userSlice.actions;
+export const { addUserDetails, addAddressDetails, removeAddressDetails, updateAddressDetails } = userSlice.actions;
 export default userSlice.reducer;

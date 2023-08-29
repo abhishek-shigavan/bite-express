@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { addAddressDetails, updateAddressDetails } from "../utils/store/userSlice";
+import {
+  addAddressDetails,
+  updateAddressDetails,
+} from "../utils/store/userSlice";
 
 const AddressModal = (props) => {
   const {
@@ -18,7 +21,7 @@ const AddressModal = (props) => {
   useEffect(() => {
     if (Object.keys(existingAddress).length > 0)
       setAddressDetails(existingAddress);
-      if(existingAddress.otherTypeString?.length > 0) setAddressType(true)
+    if (existingAddress.otherTypeString?.length > 0) setAddressType(true);
   }, [existingAddress]);
 
   const handleAddressDetails = (action = "none") => {
@@ -32,17 +35,26 @@ const AddressModal = (props) => {
         })
       );
     }
-    if (enableUpdate.visibility) setEnableUpdate({ addressId: 0, visibility: false });
+    if (enableUpdate.visibility)
+      setEnableUpdate({ addressId: 0, visibility: false });
     if (Object.keys(existingAddress).length > 0) setExistingAddress({});
-    if (addressType) setAddressType(false)
+    if (addressType) setAddressType(false);
     setOpenModal(false);
-    setAddressDetails({ apartment: "", landmark: "", area: "", type: "", otherTypeString: "" });
+    setAddressDetails({
+      apartment: "",
+      landmark: "",
+      area: "",
+      type: "",
+      otherTypeString: "",
+    });
   };
-  
+
   const handleAddressType = (type) => {
-    setAddressDetails({ ...addressDetails, type: type, otherTypeString: "" })
-    type === "Home" || type === "Work" && addressType ? setAddressType(false) : setAddressType(true)
-  }
+    setAddressDetails({ ...addressDetails, type: type, otherTypeString: "" });
+    type === "Home" || (type === "Work" && addressType)
+      ? setAddressType(false)
+      : setAddressType(true);
+  };
 
   return (
     <div
@@ -64,6 +76,51 @@ const AddressModal = (props) => {
           >
             Close
           </button>
+        </div>
+        <div className="flex gap-4 items-center">
+          <span>Address Type </span>
+          <button
+            className={
+              addressDetails.type === "Home"
+                ? "text-white bg-black border border-white rounded-lg px-3 py-2"
+                : "border border-[#686B78] rounded-lg px-3 py-2"
+            }
+            onClick={() => handleAddressType("Home")}
+          >
+            Home
+          </button>
+          <button
+            className={
+              addressDetails.type === "Work"
+                ? "text-white bg-black border border-white rounded-lg px-3 py-2"
+                : "border border-[#686B78] rounded-lg px-3 py-2"
+            }
+            onClick={() => handleAddressType("Work")}
+          >
+            Work
+          </button>
+          <button
+            className={
+              addressDetails.type === "Other"
+                ? "text-white bg-black border border-white rounded-lg px-3 py-2"
+                : "border border-[#686B78] rounded-lg px-3 py-2"
+            }
+            onClick={() => handleAddressType("Other")}
+          >
+            Other
+          </button>
+          <div className={addressType ? "flex" : "hidden"}>
+            <input
+              value={addressDetails.otherTypeString}
+              placeholder="add address type"
+              onChange={(e) => {
+                setAddressDetails({
+                  ...addressDetails,
+                  otherTypeString: e.target.value,
+                });
+              }}
+            />
+          </div>
         </div>
         <div className="py-3">
           <input
@@ -89,58 +146,18 @@ const AddressModal = (props) => {
             }}
           />
         </div>
-        <div className="flex gap-3 py-3">
-          <div className="py-3">
-            <input
-              value={addressDetails.area}
-              placeholder="Street / Area Name"
-              className="border-b"
-              onChange={(e) => {
-                setAddressDetails({
-                  ...addressDetails,
-                  area: e.target.value,
-                });
-              }}
-            />
-          </div>
-          <button
-            className={
-              addressDetails.type === "Home"
-                ? "text-white bg-black border border-white rounded-lg px-3 py-2"
-                : "border border-[#686B78] rounded-lg px-3 py-2"
-            }
-            onClick={() => handleAddressType("Home")}
-          >
-            Home
-          </button>
-          <button
-            className={
-              addressDetails.type === "Work"
-                ? "text-white bg-black border border-white rounded-lg px-3 py-2"
-                : "border border-[#686B78] rounded-lg px-3 py-2"
-            }
-            onClick={() => handleAddressType("Work")}
-          >
-            Work
-          </button>
-          <button
-            className={addressDetails.type === "Other" ? "text-white bg-black border border-white rounded-lg px-3 py-2" : "border border-[#686B78] rounded-lg px-3 py-2"}
-            onClick={() => handleAddressType("Other")}
-          >
-            Other
-          </button>
-          <div className={addressType ? "flex" : "hidden"}>
-            <input
-              value={addressDetails.otherTypeString}
-              placeholder="add address type"
-              onChange={(e) => {
-                setAddressDetails({
-                  ...addressDetails,
-                  otherTypeString: e.target.value,
-                });
-              }}
-            />
-          </div>
+        <div className="py-3">
+          <input
+            value={addressDetails.area}
+            placeholder="Street / Area Name"
+            className="border-b"
+            onChange={(e) => {
+              setAddressDetails({
+                ...addressDetails,
+                area: e.target.value,
+              });
+            }}
+          />
         </div>
         <div>
           {enableUpdate.visibility ? (

@@ -30,7 +30,7 @@ const AddressContainer = () => {
       {userAddress.map((item, index) => (
         <div key={index} className="flex border rounded-lg p-4 my-4">
           <div className="flex flex-col w-8/12">
-            <span>{item.type}</span>
+            <span>{item.type === "Other" && item.otherTypeString?.length > 0 ? item.otherTypeString : item.type}</span>
             <span>{item.apartment}</span>
             <span>{item.landmark}</span>
             <span>{item.area}</span>
